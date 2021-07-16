@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Create</title>
+</head>
+<body>
+    <div class='container'>
+        <h1 class='text-center'>Add a New Show</h1>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action='/shows/create' method='POST'>
+            {% csrf_token %}
+            <div class='form-group m-3 row justify-content-center'>
+                <label for='title' class='m-3'>Title</label>
+                <input type='text' class='form-control col-sm-6' name='title'>
+            </div>
+            <div class='form group m-3 row justify-content-center'>
+                <label for='network' class='m-3'>Network</label>
+                <input type='text' class='form-control col-sm-2' name='network'>
+                <label for='release_date' class='m-3'>Release Date</label>
+                <input type='datetime' class='form-control col-sm-2' name='release_date'>
+            </div>
+            <div class='form-group m-3 row justify-content-center'>
+                <label for='description' class='m-3 col-sm-6'>Description</label>
+                <input type='textarea' name='description'>
+            </div>
+            <div class="text-center">
+                <button type="submit" href="/shows/<int:id>" class="btn btn-primary col-md-3">Create</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
